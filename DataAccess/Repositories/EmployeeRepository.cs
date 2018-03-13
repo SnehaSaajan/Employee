@@ -231,7 +231,7 @@ namespace DataAccess.Repositories
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.Designation == obj.Value).ToList();
                     else
-                        employeeList = employee.Where(p => p.Name != obj.Value).ToList();
+                        employeeList = employee.Where(p => p.Designation != obj.Value).ToList();
 
                     break;
 

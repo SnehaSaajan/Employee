@@ -48,7 +48,11 @@ namespace BusinessLogic.Services
             }
             return dtoList;
         }
-
+        /// <summary>
+        /// maps data transfer object with data layer object
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns>SearchObject</returns>
         public SearchObject MaptoModel(EmployeeDto employee)
         {
             var model = new SearchObject();
@@ -60,7 +64,11 @@ namespace BusinessLogic.Services
             model.IsNot = employee.IsNot;
             return model;
         }
-
+        /// <summary>
+        ///returns the employee list according to search condition
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns>List(Employee)</returns>
         public IEnumerable<EmployeeDto> SearchEmployees(EmployeeDto dto)
         {
             var dtoList = new List<EmployeeDto>();

@@ -13,7 +13,10 @@ namespace Presentation.Controllers
     public class EmployeeController : Controller
     {
         private IEmployeeServices _services;
-
+        /// <summary>
+        /// get the list of all fields for each search
+        /// </summary>
+        /// <returns></returns>
         public List<SelectListItem> GetSearchFields()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -25,6 +28,10 @@ namespace Presentation.Controllers
             return items;
 
         }
+        /// <summary>
+        /// get the list of all types with which the filter condition works
+        /// </summary>
+        /// <returns></returns>
         public List<SelectListItem> GetSearchType()
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -39,6 +46,11 @@ namespace Presentation.Controllers
             return items;
 
         }
+        /// <summary>
+        /// maps data transfer object with view model object
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public EmployeeViewModel MaptoViewModel(EmployeeDto employee)
         {
             var model = new EmployeeViewModel();
@@ -50,6 +62,11 @@ namespace Presentation.Controllers
             model.Band = employee.Band;
             return model;
         }
+        /// <summary>
+        /// maps view model object with data transfer object
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         public EmployeeDto MaptoDto(SearchViewModel employee)
         {
             var model = new EmployeeDto();
@@ -61,10 +78,12 @@ namespace Presentation.Controllers
             model.IsNot = employee.IsNot;
             return model;
         }
+
         public EmployeeController(IEmployeeServices services)
         {
             _services = services;
         }
+
         // GET: Employee
         [HttpGet]
         public ActionResult Index()
@@ -81,6 +100,7 @@ namespace Presentation.Controllers
             ViewData["Search"] = model;
             return View();
         }
+        //GET :Employee with search condition
         [HttpGet]
         public ActionResult Search(SearchViewModel searchObject)
         {

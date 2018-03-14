@@ -10,18 +10,23 @@
 }
 
 
-<h2>Employee List</h2>@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
-{
-    <div class="form-group">
+<center><h2>EMPLOYEE LIST</h2></center>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        @Html.ActionLink("Add New Employee", "NewEmployee", null, htmlAttributes: new { @class = "btn btn-success" })
 
-        <input type="submit" name="btnReset" value="RESET" class="btn btn-success" />
     </div>
-}
-<hr />
+    <div class="col-md-2">
+        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+        {
+            <div class="form-group">
 
-
-<hr />
-
+                <input type="submit" name="btnReset" value="RESET" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>
 @using (Html.BeginForm("Search", "Employee", FormMethod.Get))
 {   @Html.AntiForgeryToken()
 

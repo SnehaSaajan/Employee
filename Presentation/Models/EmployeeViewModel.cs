@@ -8,18 +8,18 @@ namespace Presentation.Models
 {
     public class EmployeeViewModel
     {
-       
+        [Required]
         [Display(Name = "Employee Number")]
         public int EmployeeNumber { get; set; }
-        
+        [Required]
         public string Name { get; set; }
-
+        [Required]
         [Display(Name = "Date Of Joining")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime DateOfJoining { get; set; }
-       
+        [Required]
         public string Designation { get; set; }
-       
+        [Required]
         public string Band { get; set; }
 
 

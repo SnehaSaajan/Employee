@@ -8,17 +8,27 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="~/Scripts/Script.js"></script>
 }
-<h2>Employee List</h2>@using (Html.BeginForm("Index", "Employee", FormMethod.Get))
-{
-    <div class="form-group">
+<center><h2>EMPLOYEE LIST</h2></center>
+<br />
+<p style="color:red"><b>@TempData["message"] </b></p>
 
-        <input type="submit" name="btnReset" value="RESET" class="btn btn-success" />
+<div class="row">
+    <div class="col-md-2">
+        @Html.ActionLink("Add New Employee", "NewEmployee", null, htmlAttributes: new { @class = "btn btn-success" })
+
     </div>
-}
-<hr />
+    <div class="col-md-2">
+        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
+        {
+            <div class="form-group">
 
-@Html.Partial("_Error")
-<hr />
+                <input type="submit" name="btnReset" value="RESET" class="btn btn-success" />
+            </div>
+        }
+    </div>
+</div>
+
+
 @using (Html.BeginForm("Search", "Employee", FormMethod.Get))
 {   @Html.AntiForgeryToken()
 
@@ -53,7 +63,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="form-group">
                         <div class="col-md-1">
                             <input type="submit" id="btnFilter" value="FILTER" class="btn btn-success" />
@@ -65,7 +75,7 @@
             <div class="panel panel-success">
 
                 <div class="panel-body">
-                    <div class="row">              
+                    <div class="row">
                         <div class="form-group" id="Value" style="margin-top:15px">
                             <div class="col-md-2">
                                 @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "form-control " })

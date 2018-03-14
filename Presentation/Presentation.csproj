@@ -163,6 +163,7 @@
     <Content Include="Views\Employee\Search.cshtml" />
     <Content Include="Views\Employee\_View.cshtml" />
     <Content Include="Views\Employee\_Error.cshtml" />
+    <Content Include="Views\Employee\NewEmployee.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,6 +13,10 @@ namespace Presentation.Controllers
     public class EmployeeController : Controller
     {
         private IEmployeeServices _services;
+        public EmployeeController(IEmployeeServices services)
+        {
+            _services = services;
+        }
         /// <summary>
         /// get the list of all fields for each search
         /// </summary>
@@ -84,7 +88,7 @@ namespace Presentation.Controllers
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public EmployeeViewModel MaptoViewModel(EmployeeDto employee)
+        public EmployeeViewModel MapDtotoViewModel(EmployeeDto employee)
         {
             var model = new EmployeeViewModel();
 
@@ -96,11 +100,11 @@ namespace Presentation.Controllers
             return model;
         }
         /// <summary>
-        /// maps view model object with data transfer object
+        /// maps search view model object with data transfer object
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        public EmployeeDto MaptoDto(SearchViewModel employee)
+        public EmployeeDto MapSearchModeltoDto(SearchViewModel employee)
         {
             var model = new EmployeeDto();
             model.Field = employee.Field;
@@ -111,17 +115,21 @@ namespace Presentation.Controllers
             model.IsNot = employee.IsNot;
             return model;
         }
-
-        public EmployeeController(IEmployeeServices services)
+        public EmployeeDto MapViewModeltoDto(EmployeeViewModel employee)
         {
-            _services = services;
+            var model = new EmployeeDto();
+            model.EmployeeNumber = employee.EmployeeNumber;
+            model.Name = employee.Name;
+            model.DateOfJoining = employee.DateOfJoining;
+            model.Designation = employee.Designation;
+            model.Band = employee.Band;          
+            return model;
         }
 
         // GET: Employee
         [HttpGet]
         public ActionResult Index()
         {
-
             var model = new List<EmployeeViewModel>();
             var employees = _services.GetEmployees();
             ViewData["Fields"] = GetSearchFields();
@@ -130,11 +138,13 @@ namespace Presentation.Controllers
             ViewData["Bands"] = GetBands();
             foreach (EmployeeDto record in employees)
             {
-                model.Add(MaptoViewModel(record));
+                model.Add(MapDtotoViewModel(record));
             }
             ViewData["Search"] = model;
             return View();
         }
+
+       
         //GET :Employee with search condition
         [HttpGet]
         public ActionResult Search(SearchViewModel searchObject,string Bands,string Designations)
@@ -144,34 +154,65 @@ namespace Presentation.Controllers
             ViewData["Types"] = GetSearchType();
             ViewData["Designations"] = GetDesignations();
             ViewData["Bands"] = GetBands();
-            var model = new List<EmployeeViewModel>();
-            if (searchObject.Field == "3")
+           
+            try
             {
-                searchObject.Value = Designations;
+                var model = new List<EmployeeViewModel>();
+                if (searchObject.Field == "3")
+                {
+                    searchObject.Value = Designations;
+                }
+                if (searchObject.Field == "4")
+                {
+                    searchObject.Value = Bands;
+                }
+                var dto = MapSearchModeltoDto(searchObject);
+              
+                var employees = _services.SearchEmployees(dto);
+                foreach (EmployeeDto record in employees)
+                {
+                    model.Add(MapDtotoViewModel(record));
+                }
+                ViewData["Search"] = model;
             }
-            if (searchObject.Field == "4")
+            catch(Exception)
             {
-                searchObject.Value = Bands;
-            }
-            var dto = MaptoDto(searchObject);
-            if (searchObject.Field != "2" && searchObject.Value==null)
-            {
+                TempData["message"] = "Filter not possible";
                 return RedirectToAction("Index", "Employee");
             }
-            if (searchObject.Field == "0" && !(searchObject.Value.All(char.IsDigit)))
-            {
-                return RedirectToAction("Index", "Employee");
-            }
-
-            var employees = _services.SearchEmployees(dto);
-            foreach (EmployeeDto record in employees)
-            {
-                model.Add(MaptoViewModel(record));
-            }
-            ViewData["Search"] = model;
             ModelState.Clear();
             return View(searchObject);
 
         }
+
+        public ActionResult NewEmployee()
+        {
+            ViewData["Designations"] = GetDesignations();
+            ViewData["Bands"] = GetBands();
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewEmployee([Bind] EmployeeViewModel employee)
+        {           
+            ViewData["Designations"] = GetDesignations();
+            ViewData["Bands"] = GetBands();
+            if (ModelState.IsValid)
+            {
+                ViewBag.message = _services.AddNewEmployee(MapViewModeltoDto(employee));
+                ModelState.Clear();
+                return View();
+            }
+            else
+            {
+                ViewData["Designations"] = GetDesignations();
+                ViewData["Bands"] = GetBands();
+                return View();
+            }
+        
+        }
+
     }
 }

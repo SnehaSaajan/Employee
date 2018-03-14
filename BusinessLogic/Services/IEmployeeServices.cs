@@ -13,5 +13,7 @@ namespace BusinessLogic.Services
         EmployeeDto MapEmployeeModel(Employee employee);
         IEnumerable<EmployeeDto> GetEmployees();
         IEnumerable<EmployeeDto> SearchEmployees(EmployeeDto dto);
+        Employee MapDtoModel(EmployeeDto dto);
+        string AddNewEmployee(EmployeeDto dto);
     }
 }

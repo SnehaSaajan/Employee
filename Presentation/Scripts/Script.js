@@ -7,24 +7,36 @@ $(document).ready(function () {
     $("#Band").hide();
     $("#Field").change(ChooseOption);
     $("#Field").click(ChooseOption);
+    $("#Type option[value='0']").hide();
+    $("#Type option[value='1']").hide();
+    $("#Type option[value='2']").hide();
+    $("#Type option[value='3']").hide();
+    $("#Type option[value='4']").hide();
+    $("#Type option[value='5']").hide();
+    $("#Type option[value='6']").hide();
+    $("#Type option[value='7']").hide();
     function ChooseOption() {        
         var value = $('#Field').val();
-        $("#Type option[value='0']").show();
-        $("#Type option[value='1']").show();
-        $("#Type option[value='2']").show();
-        $("#Type option[value='3']").show();
-        $("#Type option[value='4']").show();
-        $("#Type option[value='5']").show();
-        $("#Type option[value='6']").show();
-        $("#Type option[value='7']").show();
+        $("#Type option[value='0']").hide();
+        $("#Type option[value='1']").hide();
+        $("#Type option[value='2']").hide();
+        $("#Type option[value='3']").hide();
+        $("#Type option[value='4']").hide();
+        $("#Type option[value='5']").hide();
+        $("#Type option[value='6']").hide();
+        $("#Type option[value='7']").hide();
         if (value == '0') {
             $("#Value").show();
             $("#FromDate").hide();
             $("#ToDate").hide();          
             $("#Designation").hide();
             $("#Band").hide();
-            $("#Type option[value='6']").hide();
-            $("#Type option[value='7']").hide();
+            $("#Type option[value='0']").show();
+            $("#Type option[value='1']").show();
+            $("#Type option[value='2']").show();
+            $("#Type option[value='3']").show();
+            $("#Type option[value='4']").show();
+            $("#Type option[value='5']").show();
         }
 
         else if (value == '1') {
@@ -33,11 +45,9 @@ $(document).ready(function () {
             $("#ToDate").hide();
             $("#Designation").hide();
             $("#Band").hide();
-            $("#Type option[value='0']").hide();
-            $("#Type option[value='1']").hide();
-            $("#Type option[value='2']").hide();
-            $("#Type option[value='3']").hide();
-            $("#Type option[value='7']").hide();
+            $("#Type option[value='4']").show();
+            $("#Type option[value='5']").show();
+            $("#Type option[value='6']").show();
         }
 
         else if (value == '2') {
@@ -46,8 +56,12 @@ $(document).ready(function () {
             $("#Value").hide();
             $("#Designation").hide();
             $("#Band").hide();
-            $("#Type option[value='5']").hide();
-            $("#Type option[value='6']").hide();
+            $("#Type option[value='0']").show();
+            $("#Type option[value='1']").show();
+            $("#Type option[value='2']").show();
+            $("#Type option[value='3']").show();
+            $("#Type option[value='4']").show();
+            $("#Type option[value='7']").show();
         }
 
         else if (value == '3') {
@@ -56,12 +70,8 @@ $(document).ready(function () {
             $("#ToDate").hide();
             $("#Value").hide();
             $("#Band").hide();
-            $("#Type option[value='0']").hide();
-            $("#Type option[value='1']").hide();
-            $("#Type option[value='2']").hide();
-            $("#Type option[value='3']").hide();
-            $("#Type option[value='6']").hide();
-            $("#Type option[value='7']").hide();
+            $("#Type option[value='4']").show();
+            $("#Type option[value='5']").show();
         }
 
         else if (value == '4') {
@@ -70,12 +80,8 @@ $(document).ready(function () {
             $("#ToDate").hide();
             $("#Value").hide();
             $("#Designation").hide();
-            $("#Type option[value='0']").hide();
-            $("#Type option[value='1']").hide();
-            $("#Type option[value='2']").hide();
-            $("#Type option[value='3']").hide();
-            $("#Type option[value='6']").hide();
-            $("#Type option[value='7']").hide();
+            $("#Type option[value='4']").show();
+            $("#Type option[value='5']").show();
         }
 
 

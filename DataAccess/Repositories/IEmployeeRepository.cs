@@ -7,5 +7,6 @@ namespace DataAccess.Repositories
     {
         IEnumerable<Employee> GetAllEmployees();
         IEnumerable<Employee> SearchEmployee(SearchObject obj);
+        int AddEmployee(Employee employee);
     }
 }

@@ -80,5 +80,28 @@ namespace BusinessLogic.Services
             }
             return dtoList;
         }
+
+        public Employee MapDtoModel(EmployeeDto dto)
+        {
+            var model = new Employee();
+            model.EmployeeNumber = dto.EmployeeNumber;
+            model.Name = dto.Name;
+            model.DateOfJoining = dto.DateOfJoining;
+            model.Designation = dto.Designation;
+            model.Band = dto.Band;
+            return model;
+        }
+
+        public string AddNewEmployee(EmployeeDto dto)
+        {
+           int status =_repository.AddEmployee(MapDtoModel(dto));
+            if (status == 0)
+                return "Employee already exists";
+            else
+            {
+                return "Employee details added";
+             
+            }
+        }
     }
 }

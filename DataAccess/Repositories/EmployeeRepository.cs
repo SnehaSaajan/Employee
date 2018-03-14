@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccess.Model;
 using DataAccess.DBContext;
 
@@ -73,28 +71,28 @@ namespace DataAccess.Repositories
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.EmployeeNumber > Convert.ToInt32(obj.Value)).ToList();
                     else
-                        employeeList = employee.Where(p => p.EmployeeNumber < Convert.ToInt32(obj.Value)).ToList();
+                        employeeList = employee.Where(p => p.EmployeeNumber <= Convert.ToInt32(obj.Value)).ToList();
 
                     break;
                 case "1":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.EmployeeNumber < Convert.ToInt32(obj.Value)).ToList();
                     else
-                        employeeList = employee.Where(p => p.EmployeeNumber > Convert.ToInt32(obj.Value)).ToList();
+                        employeeList = employee.Where(p => p.EmployeeNumber >= Convert.ToInt32(obj.Value)).ToList();
 
                     break;
                 case "2":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.EmployeeNumber >= Convert.ToInt32(obj.Value)).ToList();
                     else
-                        employeeList = employee.Where(p => p.EmployeeNumber <= Convert.ToInt32(obj.Value)).ToList();
+                        employeeList = employee.Where(p => p.EmployeeNumber < Convert.ToInt32(obj.Value)).ToList();
 
                     break;
                 case "3":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.EmployeeNumber <= Convert.ToInt32(obj.Value)).ToList();
                     else
-                        employeeList = employee.Where(p => p.EmployeeNumber >= Convert.ToInt32(obj.Value)).ToList();
+                        employeeList = employee.Where(p => p.EmployeeNumber > Convert.ToInt32(obj.Value)).ToList();
 
                     break;
                 case "4":
@@ -132,28 +130,28 @@ namespace DataAccess.Repositories
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.DateOfJoining > obj.FromDate).ToList();
                     else
-                        employeeList = employee.Where(p => p.DateOfJoining < obj.FromDate).ToList();
+                        employeeList = employee.Where(p => p.DateOfJoining <= obj.FromDate).ToList();
 
                     break;
                 case "1":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.DateOfJoining < obj.FromDate).ToList();
                     else
-                        employeeList = employee.Where(p => p.DateOfJoining > obj.FromDate).ToList();
+                        employeeList = employee.Where(p => p.DateOfJoining >= obj.FromDate).ToList();
 
                     break;
                 case "2":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.DateOfJoining >= obj.FromDate).ToList();
                     else
-                        employeeList = employee.Where(p => p.DateOfJoining <= obj.FromDate).ToList();
+                        employeeList = employee.Where(p => p.DateOfJoining < obj.FromDate).ToList();
 
                     break;
                 case "3":
                     if (obj.IsNot != true)
                         employeeList = employee.Where(p => p.DateOfJoining <= obj.FromDate).ToList();
                     else
-                        employeeList = employee.Where(p => p.DateOfJoining >= obj.FromDate).ToList();
+                        employeeList = employee.Where(p => p.DateOfJoining > obj.FromDate).ToList();
 
                     break;
                 case "4":
@@ -263,6 +261,25 @@ namespace DataAccess.Repositories
                     break;
             }
             return employeeList;
+        }
+
+        public int AddEmployee(Employee employee)
+        {            
+            var employeeList = new List<Employee>();
+            using (EmployeeContext context = new EmployeeContext())
+            {
+                employeeList = context.Employees.Where(p=>p.EmployeeNumber==employee.EmployeeNumber).ToList();
+                if (employeeList.Count != 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    context.Employees.Add(employee);
+                    context.SaveChanges();
+                    return 1;
+                }
+            }
         }
     }
 }

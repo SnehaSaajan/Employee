@@ -12,6 +12,7 @@ namespace Presentation.Models
         [Display(Name = "Employee Number")]
         public int EmployeeNumber { get; set; }
         [Required]
+        [RegularExpression(@"^([a-zA-Z0-9 \.\-]+)$", ErrorMessage = "Invalid Name")]
         public string Name { get; set; }
         [Required]
         [Display(Name = "Date Of Joining")]

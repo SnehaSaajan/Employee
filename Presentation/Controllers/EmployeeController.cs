@@ -181,7 +181,7 @@ namespace Presentation.Controllers
                 return RedirectToAction("Index", "Employee");
             }
             ModelState.Clear();
-            return View(searchObject);
+            return View("Index");
 
         }
 

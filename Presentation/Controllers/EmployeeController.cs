@@ -46,6 +46,39 @@ namespace Presentation.Controllers
             return items;
 
         }
+
+        /// <summary>
+        /// get the list of designations for employee
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectListItem> GetDesignations()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "SE", Value = "SE" });
+            items.Add(new SelectListItem { Text = "HR", Value = "HR" });
+            items.Add(new SelectListItem { Text = "TL", Value = "TL" });
+            items.Add(new SelectListItem { Text = "PM", Value = "PM" });
+            items.Add(new SelectListItem { Text = "BA", Value = "BA" });
+            return items;
+
+        }
+        /// <summary>
+        /// get the list of BANDS for employee
+        /// </summary>
+        /// <returns></returns>
+        public List<SelectListItem> GetBands()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem { Text = "A1", Value = "A1" });
+            items.Add(new SelectListItem { Text = "A2", Value = "A2" });
+            items.Add(new SelectListItem { Text = "B1", Value = "B1" });
+            items.Add(new SelectListItem { Text = "B2", Value = "B2" });
+            items.Add(new SelectListItem { Text = "C1", Value = "C1" });
+            items.Add(new SelectListItem { Text = "C2", Value = "C2" });
+            return items;
+
+        }
+
         /// <summary>
         /// maps data transfer object with view model object
         /// </summary>
@@ -93,6 +126,8 @@ namespace Presentation.Controllers
             var employees = _services.GetEmployees();
             ViewData["Fields"] = GetSearchFields();
             ViewData["Types"] = GetSearchType();
+            ViewData["Designations"] = GetDesignations();
+            ViewData["Bands"] = GetBands();
             foreach (EmployeeDto record in employees)
             {
                 model.Add(MaptoViewModel(record));
@@ -102,12 +137,22 @@ namespace Presentation.Controllers
         }
         //GET :Employee with search condition
         [HttpGet]
-        public ActionResult Search(SearchViewModel searchObject)
+        public ActionResult Search(SearchViewModel searchObject,string Bands,string Designations)
         {
 
             ViewData["Fields"] = GetSearchFields();
             ViewData["Types"] = GetSearchType();
+            ViewData["Designations"] = GetDesignations();
+            ViewData["Bands"] = GetBands();
             var model = new List<EmployeeViewModel>();
+            if (searchObject.Field == "3")
+            {
+                searchObject.Value = Designations;
+            }
+            if (searchObject.Field == "4")
+            {
+                searchObject.Value = Bands;
+            }
             var dto = MaptoDto(searchObject);
             if (searchObject.Field != "2" && searchObject.Value==null)
             {

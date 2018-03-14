@@ -56,47 +56,53 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group" id="Value">
-                        <div class="col-md-3" >
-                            @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "form-control " })
-                            @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
 
-
-                          </div>
-                    </div>
                     <div class="form-group">
                         <div class="col-md-1">
-                            <input type="submit" id="btnFilter" value="FILTER" class="btn btn-success"/>
+                            <input type="submit" id="btnFilter" value="FILTER" class="btn btn-success" />
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="panel panel-success">
 
                 <div class="panel-body">
                     <div class="row">
+                        <div class="form-group" id="Value" style="margin-top:15px">
+                            <div class="col-md-2">
+                                @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "form-control " })
+                                @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
+                        <div class="form-group" id="Designation" style="margin-top:15px">
+                            <div class="col-md-2">
+                                @Html.Label("Designations", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Designations", (IEnumerable<SelectListItem>)ViewData["Designations"], "--pick--", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group" id="Band">
+                            <div class="col-md-2">
+                                @Html.Label("Bands", htmlAttributes: new { @class = "form-control" })
+                                @Html.DropDownList("Bands", (IEnumerable<SelectListItem>)ViewData["Bands"], "--pick--", new { @class = "form-control" })
+                            </div>
+                        </div>
 
                         <div class="form-group" id="FromDate" style="margin-top:15px">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="col-md-4">
                                 @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                             </div>
                         </div>
-
                         <div class="form-group" id="ToDate" style="margin-top:15px">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "form-control" })
-                            </div>
-                            <div class="col-md-4">
                                 @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-
-
-                             </div>
+                            </div>
                         </div>
+
 
                     </div>
                 </div>
@@ -107,5 +113,8 @@
 }
 
 <div>
+
     @Html.Partial("_View", ViewData["Search"])
 </div>
+
+

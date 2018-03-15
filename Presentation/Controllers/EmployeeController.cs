@@ -127,7 +127,7 @@ namespace Presentation.Controllers
         }
 
         // GET: Employee
-        [HttpGet]
+      
         public ActionResult Index()
         {
             var model = new List<EmployeeViewModel>();

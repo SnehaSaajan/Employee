@@ -18,13 +18,8 @@
 
     </div>
     <div class="col-md-2">
-        @using (Html.BeginForm("Index", "Employee", FormMethod.Get))
-        {
-            <div class="form-group">
+               @Html.ActionLink("RESET", "Index", null, htmlAttributes: new { @class = "btn btn-success" })
 
-                <input type="submit" name="btnReset" value="RESET" class="btn btn-success" />
-            </div>
-        }
     </div>
 </div>
 
